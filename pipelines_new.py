@@ -5,8 +5,7 @@ import shutil
 import socket
 import argparse
 from subprocess import call
-sys.path.append('/home/rachelz/HiC-Pro/scripts')
-import mergeSAM
+
 
 # read configuration file
 config = ConfigParser.ConfigParser()
@@ -62,8 +61,10 @@ def alignment(r1, r2, genome, prefix, outdir):
 
 def merge()
 
-	cmd =  
-python ~/HiC-Pro/scripts/mergeSAM.py -f alignment.R1.bam -r alignment.R2.bam -o ./test.bwt2pairs.bam
+	cmd = python + ' ' + hic + 'mergeSAM' + ' -f ' + outdir + '/' + 'alignment.R1.bam'+ \
+	+ ' -r ' + outdir + '/' + 'alignment.R2.bam' + ' -o ' + outdir + '/' + 'pairs.bam'
+
+	print cmd
 
 	
 
@@ -90,5 +91,5 @@ if __name__ == '__main__':
 		parser.error('invalid genome')
 	else:
 		alignment(options.r1, options.r2, options.genome, options.prefix, options.output_dir)
-		merge()
+		merge(options.output_dir)
 	
