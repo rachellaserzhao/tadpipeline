@@ -61,7 +61,7 @@ def alignment(r1, r2, genome, prefix, outdir):
 
 def merge()
 
-	cmd = python + ' ' + hic + 'mergeSAM' + ' -f ' + outdir + '/' + 'alignment.R1.bam'+ \
+	cmd = python + ' ' + hic + 'mergeSAM.py' + ' -f ' + outdir + '/' + 'alignment.R1.bam'+ \
 	+ ' -r ' + outdir + '/' + 'alignment.R2.bam' + ' -o ' + outdir + '/' + 'pairs.bam'
 
 	print cmd
