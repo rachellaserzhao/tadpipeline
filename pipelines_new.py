@@ -54,16 +54,21 @@ def alignment(r1, r2, genome, prefix, outdir):
 	' ' + westgrid_config[genome] + ' ' + r2 + ' | ' + samtools + ' sort -n -O BAM -o ' + outdir+ '/' + 'alignment.R2.bam'
 
 	with io.open('test.sh', 'w') as file:
-    file.write(u'#!/bin/bash')
-    file.write(u'echo $1')
-	
-	if not closed:
+		file.write(u'#!/bin/bash' + '\n')
+		file.write(u''+ cmd_r1 + '\n')
+		file.write(u''+ cmd_r2 + '\n')
+	if not file.closed:
 		file.close()
 
+<<<<<<< HEAD
 def merge()
 
 python ~/HiC-Pro/scripts/mergeSAM.py -f alignment.R1.bam -r alignment.R2.bam -o ./test.bwt2pairs.bam
 
+=======
+	call('chmod +x test.sh', shell=True)
+	call('./test.sh', shell=True)
+>>>>>>> 72184114c6b0166d5c8c4cdc6adef45db6438406
 	
 
 if __name__ == '__main__':
