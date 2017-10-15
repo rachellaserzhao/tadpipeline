@@ -64,7 +64,7 @@ def merge(outdir):
 	cmd = python + ' ' + hic + 'mergeSAM.py' + ' -f ' + outdir + '/' + 'alignment.R1.bam'+ \
 	' -r ' + outdir + '/' + 'alignment.R2.bam' + ' -o ' + outdir + '/' + 'pairs.bam'
 
-	print cmd
+	call(cmd, shell=True)
 
 	
 
