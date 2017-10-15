@@ -60,15 +60,11 @@ def alignment(r1, r2, genome, prefix, outdir):
 	if not file.closed:
 		file.close()
 
-<<<<<<< HEAD
 def merge()
 
+	cmd =  
 python ~/HiC-Pro/scripts/mergeSAM.py -f alignment.R1.bam -r alignment.R2.bam -o ./test.bwt2pairs.bam
 
-=======
-	call('chmod +x test.sh', shell=True)
-	call('./test.sh', shell=True)
->>>>>>> 72184114c6b0166d5c8c4cdc6adef45db6438406
 	
 
 if __name__ == '__main__':
