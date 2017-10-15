@@ -53,14 +53,14 @@ def alignment(r1, r2, genome, prefix, outdir):
 	' ' + westgrid_config[genome] + ' ' + r2 + ' | ' + samtools + ' sort -n -O BAM -o ' + outdir+ '/' + 'alignment.R2.bam'
 
 	with io.open('test.sh', 'w') as file:
-    file.write(u'#!/bin/bash')
-    file.write(u'echo $1')
-	
-	if not closed:
+		file.write(u'#!/bin/bash' + '\n')
+		file.write(u''+ cmd_r1 + '\n')
+		file.write(u''+ cmd_r2 + '\n')
+	if not file.closed:
 		file.close()
 
-
-
+	call('chmod +x test.sh', shell=True)
+	call('./test.sh', shell=True)
 	
 
 if __name__ == '__main__':
