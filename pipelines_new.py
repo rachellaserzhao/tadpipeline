@@ -62,11 +62,18 @@ def alignment(r1, r2, genome, prefix, outdir):
 def merge(outdir):
 
 	cmd = python + ' ' + hic + 'mergeSAM.py' + ' -f ' + outdir + '/' + 'alignment.R1.bam'+ \
-	' -r ' + outdir + '/' + 'alignment.R2.bam' + ' -o ' + outdir + '/' + 'pairs.bam'
+	' -r ' + outdir + '/' + 'alignment.R2.bam' + ' -o ' + outdir + '/' + 'paired.bam'
 
 	call(cmd, shell=True)
 
-	
+## add options for with or without fragments 
+
+def valid_pair(outdir):
+
+	## add option to call fragment script
+	cmd = python + ' ' + hic + 'mapped_2hic_dnase.py' + ' -a -v -r paired.bam -o ' + outdir +'/'
+	#call(cmd, shell=True)
+	print cmd
 
 if __name__ == '__main__':
 	
@@ -85,7 +92,9 @@ if __name__ == '__main__':
 	email = westgrid_config['email']
 	python = westgrid_config['python']
 	hic = westgrid_config['hic']
-	
+	## add fragmentation option 
+
+	## output_dir check for /
 	if not os.path.exists(os.path.abspath(options.output_dir)):
 		os.makedirs(os.path.abspath(options.output_dir))
 
@@ -93,5 +102,5 @@ if __name__ == '__main__':
 		parser.error('invalid genome')
 	else:
 		#alignment(options.r1, options.r2, options.genome, options.prefix, options.output_dir)
-		merge(options.output_dir)
-	
+		#merge(options.output_dir)
+		valid_pair(options.output_dir)
