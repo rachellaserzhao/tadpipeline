@@ -46,13 +46,13 @@ def alignment(r1, r2, genome, prefix, outdir):
 
 	header = r'@RG\tID:BWA\tSM:'
 
-	cmd_r1 = bwa + ' mem ' + '-t ' +  processors + ' -M -U 0 -L "0,0" -R ' + header + prefix + \
-	' ' + westgrid_config[genome] + ' ' + r1 + ' | ' + samtools + ' sort -n -O BAM -o ' + outdir+ '/' + 'alignment.R1.bam'
+	cmd_r1 = "'" + bwa + ' mem ' + '-t ' +  processors + ' -M -U 0 -L "0,0" -R "' + header + prefix + '"'+ \
+	' ' + westgrid_config[genome] + ' ' + r1 + ' | ' + samtools + ' sort -n -O BAM -o ' + outdir+ '/' + 'alignment.R1.bam' + "'"
 
-	cmd_r2 = bwa + ' mem ' + '-t ' +  processors + ' -M -U 0 -L "0,0" -R ' + header + prefix + \
-	' ' + westgrid_config[genome] + ' ' + r2 + ' | ' + samtools + ' sort -n -O BAM -o ' + outdir+ '/' + 'alignment.R2.bam'
-	print cmd_r1
-	print cmd_r2
+	cmd_r2 = "'" + bwa + ' mem ' + '-t ' +  processors + ' -M -U 0 -L "0,0" -R "' + header + prefix + '"' + \
+	' ' + westgrid_config[genome] + ' ' + r2 + ' | ' + samtools + ' sort -n -O BAM -o ' + outdir+ '/' + 'alignment.R2.bam' + "'"
+	call(cmd_r1, shell=True)
+	call(cmd_r2, shell=True)
 	
 
 if __name__ == '__main__':
