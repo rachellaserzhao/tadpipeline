@@ -90,6 +90,6 @@ if __name__ == '__main__':
 	if options.genome != "hg19" and options.genome != "hg38":
 		parser.error('invalid genome')
 	else:
-		alignment(options.r1, options.r2, options.genome, options.prefix, options.output_dir)
+		#alignment(options.r1, options.r2, options.genome, options.prefix, options.output_dir)
 		merge(options.output_dir)
 	
