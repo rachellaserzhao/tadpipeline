@@ -71,7 +71,8 @@ def merge(outdir):
 def valid_pair(outdir):
 
 	## add option to call fragment script
-	cmd = python + ' ' + hic + 'mapped_2hic_dnase.py' + ' -a -v -r paired.bam -o ' + outdir +'/'
+	cmd = python + ' ' + hic + 'mapped_2hic_dnase.py' + ' -a -v -r ' + outdir + '/' + 'paired.bam' + \
+	' -o ' + outdir +'/'
 	call(cmd, shell=True)
 	
 
