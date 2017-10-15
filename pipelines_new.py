@@ -1,5 +1,5 @@
 #!/usr/bin/env python2.7
-import os, sys, re
+import os, sys, re, io
 import ConfigParser
 import shutil
 import socket
@@ -46,13 +46,21 @@ def alignment(r1, r2, genome, prefix, outdir):
 
 	header = r'@RG\tID:BWA\tSM:'
 
-	cmd_r1 = "'" + bwa + ' mem ' + '-t ' +  processors + ' -M -U 0 -L "0,0" -R "' + header + prefix + '"'+ \
-	' ' + westgrid_config[genome] + ' ' + r1 + ' | ' + samtools + ' sort -n -O BAM -o ' + outdir+ '/' + 'alignment.R1.bam' + "'"
+	cmd_r1 = bwa + ' mem ' + '-t ' +  processors + ' -M -U 0 -L "0,0" -R "' + header + prefix + '"'+ \
+	' ' + westgrid_config[genome] + ' ' + r1 + ' | ' + samtools + ' sort -n -O BAM -o ' + outdir+ '/' + 'alignment.R1.bam'
 
-	cmd_r2 = "'" + bwa + ' mem ' + '-t ' +  processors + ' -M -U 0 -L "0,0" -R "' + header + prefix + '"' + \
-	' ' + westgrid_config[genome] + ' ' + r2 + ' | ' + samtools + ' sort -n -O BAM -o ' + outdir+ '/' + 'alignment.R2.bam' + "'"
-	call(cmd_r1, shell=True)
-	call(cmd_r2, shell=True)
+	cmd_r2 = bwa + ' mem ' + '-t ' +  processors + ' -M -U 0 -L "0,0" -R "' + header + prefix + '"' + \
+	' ' + westgrid_config[genome] + ' ' + r2 + ' | ' + samtools + ' sort -n -O BAM -o ' + outdir+ '/' + 'alignment.R2.bam'
+
+	with io.open('test.sh', 'w') as file:
+    file.write(u'#!/bin/bash')
+    file.write(u'echo $1')
+	
+	if not closed:
+		file.close()
+
+
+
 	
 
 if __name__ == '__main__':
