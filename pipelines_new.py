@@ -83,6 +83,8 @@ if __name__ == '__main__':
 	hg38 = westgrid_config['hg38']
 	hg19 = westgrid_config['hg19']
 	email = westgrid_config['email']
+	python = westgrid_config['python']
+	hic = westgrid_config['hic']
 	
 	if not os.path.exists(os.path.abspath(options.output_dir)):
 		os.makedirs(os.path.abspath(options.output_dir))
