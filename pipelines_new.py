@@ -42,7 +42,7 @@ def ConfigSectionMap(section):
             dict1[option] = None
     return dict1
 
-def alignment(r1, r2, genome, prefix, outdir):
+def main(r1, r2, genome, prefix, outdir):
 
 	header = r'@RG\tID:BWA\tSM:'
 
@@ -52,37 +52,23 @@ def alignment(r1, r2, genome, prefix, outdir):
 	cmd_r2 = bwa + ' mem ' + '-t ' +  processors + ' -M -U 0 -L "0,0" -R "' + header + prefix + '"' + \
 	' ' + westgrid_config[genome] + ' ' + r2 + ' | ' + samtools + ' sort -n -O BAM -o ' + outdir+ '/' + 'alignment.R2.bam'
 
+	cmd_merge = python + ' ' + hic + 'mergeSAM.py' + ' -f ' + outdir + '/' + 'alignment.R1.bam'+ \
+	' -r ' + outdir + '/' + 'alignment.R2.bam' + ' -o ' + outdir + '/' + 'paired.bam'
+	
+	# add option to fragment file
+	cmd_valid_pair = python + ' ' + hic + 'mapped_2hic_dnase.py' + ' -a -v -r ' + outdir + '/' + 'paired.bam' + \
+	' -o ' + outdir +'/'
+
 	with io.open('test.sh', 'w') as file:
 		file.write(u'#!/bin/bash' + '\n')
 		file.write(u''+ cmd_r1 + '\n')
 		file.write(u''+ cmd_r2 + '\n')
-	if not file.closed:
-		file.close()
+		file.write(u''+ cmd_merge + '\n')
+		file.write(u''+ cmd_valid_pair + '\n')
 
-def merge(outdir):
-
-	cmd = python + ' ' + hic + 'mergeSAM.py' + ' -f ' + outdir + '/' + 'alignment.R1.bam'+ \
-	' -r ' + outdir + '/' + 'alignment.R2.bam' + ' -o ' + outdir + '/' + 'paired.bam'
-	
-	with io.open('test.sh', 'w') as file:
-		file.write(u''+ cmd + '\n')
 	if not file.closed:
 		file.close()
 	
-	#call(cmd, shell=True)
-
-## add options for with or without fragments 
-
-def valid_pair(outdir):
-
-	## add option to call fragment script
-	cmd = python + ' ' + hic + 'mapped_2hic_dnase.py' + ' -a -v -r ' + outdir + '/' + 'paired.bam' + \
-	' -o ' + outdir +'/'
-	
-	with io.open('test.sh', 'w') as file:
-		file.write(u''+ cmd + '\n')	
-	if not file.closed:
-		file.close()
 
 if __name__ == '__main__':
 	
@@ -109,7 +95,6 @@ if __name__ == '__main__':
 
 	if options.genome != "hg19" and options.genome != "hg38":
 		parser.error('invalid genome')
-	else:
-		alignment(options.r1, options.r2, options.genome, options.prefix, options.output_dir)
-		merge(options.output_dir)
-		valid_pair(options.output_dir)
+	else
+		main(options.r1, options.r2, options.genome, options.prefix, options.output_dir)
+
