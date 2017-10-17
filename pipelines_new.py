@@ -63,8 +63,13 @@ def merge(outdir):
 
 	cmd = python + ' ' + hic + 'mergeSAM.py' + ' -f ' + outdir + '/' + 'alignment.R1.bam'+ \
 	' -r ' + outdir + '/' + 'alignment.R2.bam' + ' -o ' + outdir + '/' + 'paired.bam'
-
-	call(cmd, shell=True)
+	
+	with io.open('test.sh', 'w') as file:
+		file.write(u''+ cmd + '\n')
+	if not file.closed:
+		file.close()
+	
+	#call(cmd, shell=True)
 
 ## add options for with or without fragments 
 
@@ -73,8 +78,11 @@ def valid_pair(outdir):
 	## add option to call fragment script
 	cmd = python + ' ' + hic + 'mapped_2hic_dnase.py' + ' -a -v -r ' + outdir + '/' + 'paired.bam' + \
 	' -o ' + outdir +'/'
-	call(cmd, shell=True)
 	
+	with io.open('test.sh', 'w') as file:
+		file.write(u''+ cmd + '\n')	
+	if not file.closed:
+		file.close()
 
 if __name__ == '__main__':
 	
@@ -102,6 +110,6 @@ if __name__ == '__main__':
 	if options.genome != "hg19" and options.genome != "hg38":
 		parser.error('invalid genome')
 	else:
-		#alignment(options.r1, options.r2, options.genome, options.prefix, options.output_dir)
-		#merge(options.output_dir)
+		alignment(options.r1, options.r2, options.genome, options.prefix, options.output_dir)
+		merge(options.output_dir)
 		valid_pair(options.output_dir)
