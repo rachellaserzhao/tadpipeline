@@ -1,0 +1,36 @@
+name	Unique Positions	Total Tags
+genome	397371	397371.0
+pairedEnd=true
+fragmentLengthEstimate=286		
+peakSizeEstimate=419		
+tagsPerBP=0.000129		
+averageTagsPerPosition=1.006		
+averageTagLength=35.862		
+gsizeEstimate=3087225891		
+averageFragmentGCcontent=-1.000		
+chr1	30398	30512.0
+chr2	35679	35830.0
+chr3	29345	29447.0
+chr4	29228	29306.0
+chr5	26227	26325.0
+chr6	25372	25448.0
+chr7	21349	21422.0
+chr8	20511	20593.0
+chr9	15892	15929.0
+chr10	17022	17055.0
+chr11	17929	17995.0
+chr12	18923	18996.0
+chr13	14530	14572.0
+chr14	12184	12216.0
+chr15	11101	11126.0
+chr16	8324	8343.0
+chr17	9556	9708.0
+chr18	10758	10785.0
+chr19	4240	4245.0
+chr20	7146	7163.0
+chr21	5300	5320.0
+chr22	3496	3509.0
+chrX	19552	19594.0
+chrY	657	664.0
+chrM	1148	1268.0
+cmd=makeTagDirectory Tagdir alignment.R1.bed,alignment.R2.bed -tbp 1		
