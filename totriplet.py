@@ -2,13 +2,14 @@ import numpy as np
 from scipy.sparse import coo_matrix
 import sys
 
-data = np.loadtxt("/home/rachelz/pipeline/tadpipeline/cluster_test/outputMatrixFile.txt", skiprows=1, usecols=range(2,325))
+data = np.loadtxt("simulatedmatrix.txt", skiprows=1, usecols=range(1,4602))
 triplet = coo_matrix(data)
 
 newrow = [x+1 for x in triplet.row]
 newcol = [x+1 for x in triplet.col]
+newdata = [int(x) for x in triplet.data]
 
-with open ('trip.txt' , 'w') as output:
+with open ('simulatedtriple.txt' , 'w') as output:
 	sys.stdout = output
-	for r, v, c in zip(newrow, triplet.data, newcol):
-		print("{0}\t{1}\t{2}".format(r, v, c))
+	for r, c, v in zip(newrow, newcol, newdata):
+		print("{0}\t{1}\t{2}".format(r, c, v))
