@@ -5,8 +5,8 @@ import sys
 data = np.loadtxt("simulatedmatrix.txt", skiprows=1, usecols=range(1,4602))
 triplet = coo_matrix(data)
 
-newrow = [x+1 for x in triplet.row]
-newcol = [x+1 for x in triplet.col]
+newrow = [int(x+1) for x in triplet.row]
+newcol = [int(x+1) for x in triplet.col]
 newdata = [int(x) for x in triplet.data]
 
 with open ('simulatedtriple.txt' , 'w') as output:
